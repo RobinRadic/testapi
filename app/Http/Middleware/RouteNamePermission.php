@@ -8,9 +8,10 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Dingo\Api\Auth\Auth as Authorization;
 use Dingo\Api\Routing\Router;
-use Dingo\Api\Auth\Auth as Authentication;
-use Sentinel;
+use Entrust;
+
 
 /**
  * This is the RequirePermission.
@@ -44,7 +45,7 @@ class RouteNamePermission
      * @param \Dingo\Api\Routing\Router $router
      * @param \Dingo\Api\Auth\Auth $auth
      */
-    public function __construct(Router $router, Authentication $auth)
+    public function __construct(Router $router, Authorization $auth)
     {
         $this->router = $router;
         $this->auth = $auth;
@@ -62,13 +63,12 @@ class RouteNamePermission
      */
     public function handle($request, Closure $next, $permission = null)
     {
-        Sentinel::basic();
         if ( is_null($permission) )
         {
             $name = $this->router->getCurrentRoute()->getName();
             $permission = is_null($name) ? $this->router->getCurrentRoute()->getActionName() : $name;
         }
-        if(Sentinel::hasAccess($permission))
+        if(Entrust::can($permission))
         {
             return $next($request);
         } else {

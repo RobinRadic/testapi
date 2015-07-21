@@ -26,6 +26,6 @@ class Auth extends Facade
      */
     public static function getFacadeAccessor()
     {
-        return 'Dingo\Api\Auth\Auth';
+        return 'tank';
     }
 }

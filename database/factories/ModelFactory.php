@@ -8,31 +8,37 @@
 $factory->define(App\User::class, function (Faker\Generator $faker)
 {
     return [
-        #'username'           => $faker->name,
         'email'          => $faker->email,
-        'first_name' => $faker->firstName,
-        'last_name' => $faker->lastName,
-        'password'       => Sentinel::getHasher()->hash(str_random(10)),
+        'password'       => 'test',
+        'password_confirmation' => 'test',
+        'confirmation_code'     => md5(uniqid(mt_rand(), true)),
+        'confirmed'             => 1
        # 'remember_token' => str_random(10),
     ];
 });
 
 $factory->defineAs(App\User::class, 'admin', function (Faker\Generator $faker) use ($factory)
 {
-
     $user = $factory->raw(App\User::class);
-   # $user['username'] = 'admin' . $faker->numberBetween(0, 9);
-    $user[ 'email' ]    = $faker->numberBetween(0, 9).'@radic.nl';
-    $user[ 'password' ] = Sentinel::getHasher()->hash('test');
+    $user[ 'email' ]    = 'admin-' . $faker->numberBetween(0, 9).'@radic.nl';
     return $user;
 });
 
 $factory->defineAs(App\User::class, 'radic', function (Faker\Generator $faker) use ($factory)
 {
     $user               = $factory->raw(App\User::class, [ ], 'admin');
-    #$user[ 'username' ]     = 'radic';
     $user[ 'email' ]    = 'robin@radic.nl';
-    $user[ 'password' ] = Sentinel::getHasher()->hash('test');
-
     return $user;
+});
+
+
+$factory->define(App\Permission::class,  function(Faker\Generator $faker) use ($factory){
+
+});
+$factory->defineAs(App\Permission::class, 'default', function(Faker\Generator $faker) use ($factory){
+
+});
+
+$factory->defineAs(App\Role::class, 'random', function(Faker\Generator $faker) use ($factory){
+
 });

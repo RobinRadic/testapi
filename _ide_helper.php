@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.1.7 (LTS) on 2015-07-20.
+ * Generated for Laravel 5.1.7 (LTS) on 2015-07-21.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -1927,6 +1927,397 @@ if (!function_exists('with')) {
         public static function bootstrap(){
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
             \App\Console\Kernel::bootstrap();
+        }
+        
+    }
+
+
+    class Auth extends \Illuminate\Support\Facades\Auth{
+        
+        /**
+         * Create an instance of the database driver.
+         *
+         * @return \Illuminate\Auth\Guard 
+         * @static 
+         */
+        public static function createDatabaseDriver(){
+            return \Illuminate\Auth\AuthManager::createDatabaseDriver();
+        }
+        
+        /**
+         * Create an instance of the Eloquent driver.
+         *
+         * @return \Illuminate\Auth\Guard 
+         * @static 
+         */
+        public static function createEloquentDriver(){
+            return \Illuminate\Auth\AuthManager::createEloquentDriver();
+        }
+        
+        /**
+         * Get the default authentication driver name.
+         *
+         * @return string 
+         * @static 
+         */
+        public static function getDefaultDriver(){
+            return \Illuminate\Auth\AuthManager::getDefaultDriver();
+        }
+        
+        /**
+         * Set the default authentication driver name.
+         *
+         * @param string $name
+         * @return void 
+         * @static 
+         */
+        public static function setDefaultDriver($name){
+            \Illuminate\Auth\AuthManager::setDefaultDriver($name);
+        }
+        
+        /**
+         * Get a driver instance.
+         *
+         * @param string $driver
+         * @return mixed 
+         * @static 
+         */
+        public static function driver($driver = null){
+            //Method inherited from \Illuminate\Support\Manager            
+            return \Illuminate\Auth\AuthManager::driver($driver);
+        }
+        
+        /**
+         * Register a custom driver creator Closure.
+         *
+         * @param string $driver
+         * @param \Closure $callback
+         * @return $this 
+         * @static 
+         */
+        public static function extend($driver, $callback){
+            //Method inherited from \Illuminate\Support\Manager            
+            return \Illuminate\Auth\AuthManager::extend($driver, $callback);
+        }
+        
+        /**
+         * Get all of the created "drivers".
+         *
+         * @return array 
+         * @static 
+         */
+        public static function getDrivers(){
+            //Method inherited from \Illuminate\Support\Manager            
+            return \Illuminate\Auth\AuthManager::getDrivers();
+        }
+        
+        /**
+         * Determine if the current user is authenticated.
+         *
+         * @return bool 
+         * @static 
+         */
+        public static function check(){
+            return \Illuminate\Auth\Guard::check();
+        }
+        
+        /**
+         * Determine if the current user is a guest.
+         *
+         * @return bool 
+         * @static 
+         */
+        public static function guest(){
+            return \Illuminate\Auth\Guard::guest();
+        }
+        
+        /**
+         * Get the currently authenticated user.
+         *
+         * @return \App\User|null 
+         * @static 
+         */
+        public static function user(){
+            return \Illuminate\Auth\Guard::user();
+        }
+        
+        /**
+         * Get the ID for the currently authenticated user.
+         *
+         * @return int|null 
+         * @static 
+         */
+        public static function id(){
+            return \Illuminate\Auth\Guard::id();
+        }
+        
+        /**
+         * Log a user into the application without sessions or cookies.
+         *
+         * @param array $credentials
+         * @return bool 
+         * @static 
+         */
+        public static function once($credentials = array()){
+            return \Illuminate\Auth\Guard::once($credentials);
+        }
+        
+        /**
+         * Validate a user's credentials.
+         *
+         * @param array $credentials
+         * @return bool 
+         * @static 
+         */
+        public static function validate($credentials = array()){
+            return \Illuminate\Auth\Guard::validate($credentials);
+        }
+        
+        /**
+         * Attempt to authenticate using HTTP Basic Auth.
+         *
+         * @param string $field
+         * @return \Symfony\Component\HttpFoundation\Response|null 
+         * @static 
+         */
+        public static function basic($field = 'email'){
+            return \Illuminate\Auth\Guard::basic($field);
+        }
+        
+        /**
+         * Perform a stateless HTTP Basic login attempt.
+         *
+         * @param string $field
+         * @return \Symfony\Component\HttpFoundation\Response|null 
+         * @static 
+         */
+        public static function onceBasic($field = 'email'){
+            return \Illuminate\Auth\Guard::onceBasic($field);
+        }
+        
+        /**
+         * Attempt to authenticate a user using the given credentials.
+         *
+         * @param array $credentials
+         * @param bool $remember
+         * @param bool $login
+         * @return bool 
+         * @static 
+         */
+        public static function attempt($credentials = array(), $remember = false, $login = true){
+            return \Illuminate\Auth\Guard::attempt($credentials, $remember, $login);
+        }
+        
+        /**
+         * Register an authentication attempt event listener.
+         *
+         * @param mixed $callback
+         * @return void 
+         * @static 
+         */
+        public static function attempting($callback){
+            \Illuminate\Auth\Guard::attempting($callback);
+        }
+        
+        /**
+         * Log a user into the application.
+         *
+         * @param \Illuminate\Contracts\Auth\Authenticatable $user
+         * @param bool $remember
+         * @return void 
+         * @static 
+         */
+        public static function login($user, $remember = false){
+            \Illuminate\Auth\Guard::login($user, $remember);
+        }
+        
+        /**
+         * Log the given user ID into the application.
+         *
+         * @param mixed $id
+         * @param bool $remember
+         * @return \App\User 
+         * @static 
+         */
+        public static function loginUsingId($id, $remember = false){
+            return \Illuminate\Auth\Guard::loginUsingId($id, $remember);
+        }
+        
+        /**
+         * Log the given user ID into the application without sessions or cookies.
+         *
+         * @param mixed $id
+         * @return bool 
+         * @static 
+         */
+        public static function onceUsingId($id){
+            return \Illuminate\Auth\Guard::onceUsingId($id);
+        }
+        
+        /**
+         * Log the user out of the application.
+         *
+         * @return void 
+         * @static 
+         */
+        public static function logout(){
+            \Illuminate\Auth\Guard::logout();
+        }
+        
+        /**
+         * Get the cookie creator instance used by the guard.
+         *
+         * @return \Illuminate\Contracts\Cookie\QueueingFactory 
+         * @throws \RuntimeException
+         * @static 
+         */
+        public static function getCookieJar(){
+            return \Illuminate\Auth\Guard::getCookieJar();
+        }
+        
+        /**
+         * Set the cookie creator instance used by the guard.
+         *
+         * @param \Illuminate\Contracts\Cookie\QueueingFactory $cookie
+         * @return void 
+         * @static 
+         */
+        public static function setCookieJar($cookie){
+            \Illuminate\Auth\Guard::setCookieJar($cookie);
+        }
+        
+        /**
+         * Get the event dispatcher instance.
+         *
+         * @return \Illuminate\Contracts\Events\Dispatcher 
+         * @static 
+         */
+        public static function getDispatcher(){
+            return \Illuminate\Auth\Guard::getDispatcher();
+        }
+        
+        /**
+         * Set the event dispatcher instance.
+         *
+         * @param \Illuminate\Contracts\Events\Dispatcher $events
+         * @return void 
+         * @static 
+         */
+        public static function setDispatcher($events){
+            \Illuminate\Auth\Guard::setDispatcher($events);
+        }
+        
+        /**
+         * Get the session store used by the guard.
+         *
+         * @return \Illuminate\Session\Store 
+         * @static 
+         */
+        public static function getSession(){
+            return \Illuminate\Auth\Guard::getSession();
+        }
+        
+        /**
+         * Get the user provider used by the guard.
+         *
+         * @return \Illuminate\Contracts\Auth\UserProvider 
+         * @static 
+         */
+        public static function getProvider(){
+            return \Illuminate\Auth\Guard::getProvider();
+        }
+        
+        /**
+         * Set the user provider used by the guard.
+         *
+         * @param \Illuminate\Contracts\Auth\UserProvider $provider
+         * @return void 
+         * @static 
+         */
+        public static function setProvider($provider){
+            \Illuminate\Auth\Guard::setProvider($provider);
+        }
+        
+        /**
+         * Return the currently cached user.
+         *
+         * @return \App\User|null 
+         * @static 
+         */
+        public static function getUser(){
+            return \Illuminate\Auth\Guard::getUser();
+        }
+        
+        /**
+         * Set the current user.
+         *
+         * @param \Illuminate\Contracts\Auth\Authenticatable $user
+         * @return void 
+         * @static 
+         */
+        public static function setUser($user){
+            \Illuminate\Auth\Guard::setUser($user);
+        }
+        
+        /**
+         * Get the current request instance.
+         *
+         * @return \Symfony\Component\HttpFoundation\Request 
+         * @static 
+         */
+        public static function getRequest(){
+            return \Illuminate\Auth\Guard::getRequest();
+        }
+        
+        /**
+         * Set the current request instance.
+         *
+         * @param \Symfony\Component\HttpFoundation\Request $request
+         * @return $this 
+         * @static 
+         */
+        public static function setRequest($request){
+            return \Illuminate\Auth\Guard::setRequest($request);
+        }
+        
+        /**
+         * Get the last user we attempted to authenticate.
+         *
+         * @return \App\User 
+         * @static 
+         */
+        public static function getLastAttempted(){
+            return \Illuminate\Auth\Guard::getLastAttempted();
+        }
+        
+        /**
+         * Get a unique identifier for the auth session value.
+         *
+         * @return string 
+         * @static 
+         */
+        public static function getName(){
+            return \Illuminate\Auth\Guard::getName();
+        }
+        
+        /**
+         * Get the name of the cookie used to store the "recaller".
+         *
+         * @return string 
+         * @static 
+         */
+        public static function getRecallerName(){
+            return \Illuminate\Auth\Guard::getRecallerName();
+        }
+        
+        /**
+         * Determine if the user was authenticated via "remember me" cookie.
+         *
+         * @return bool 
+         * @static 
+         */
+        public static function viaRemember(){
+            return \Illuminate\Auth\Guard::viaRemember();
         }
         
     }
@@ -12045,637 +12436,248 @@ if (!function_exists('with')) {
     }
 
 
-    class Activation extends \Cartalyst\Sentinel\Laravel\Facades\Activation{
+    class Confide extends \Zizaco\Confide\Facade{
         
         /**
-         * {@inheritDoc}
+         * Returns an object of the model set in auth config.
          *
-         * @static 
-         */
-        public static function create($user){
-            return \Cartalyst\Sentinel\Activations\IlluminateActivationRepository::create($user);
-        }
-        
-        /**
-         * {@inheritDoc}
-         *
-         * @static 
-         */
-        public static function exists($user, $code = null){
-            return \Cartalyst\Sentinel\Activations\IlluminateActivationRepository::exists($user, $code);
-        }
-        
-        /**
-         * {@inheritDoc}
-         *
-         * @static 
-         */
-        public static function complete($user, $code){
-            return \Cartalyst\Sentinel\Activations\IlluminateActivationRepository::complete($user, $code);
-        }
-        
-        /**
-         * {@inheritDoc}
-         *
-         * @static 
-         */
-        public static function completed($user){
-            return \Cartalyst\Sentinel\Activations\IlluminateActivationRepository::completed($user);
-        }
-        
-        /**
-         * {@inheritDoc}
-         *
-         * @static 
-         */
-        public static function remove($user){
-            return \Cartalyst\Sentinel\Activations\IlluminateActivationRepository::remove($user);
-        }
-        
-        /**
-         * {@inheritDoc}
-         *
-         * @static 
-         */
-        public static function removeExpired(){
-            return \Cartalyst\Sentinel\Activations\IlluminateActivationRepository::removeExpired();
-        }
-        
-        /**
-         * Create a new instance of the model.
-         *
-         * @param array $data
          * @return mixed 
          * @static 
          */
-        public static function createModel($data = array()){
-            return \Cartalyst\Sentinel\Activations\IlluminateActivationRepository::createModel($data);
+        public static function model(){
+            return \Zizaco\Confide\Confide::model();
         }
         
         /**
-         * Returns the model.
+         * Get the currently authenticated user or null.
          *
-         * @return string 
+         * @return \Zizaco\Confide\ConfideUserInterface|null 
          * @static 
          */
-        public static function getModel(){
-            return \Cartalyst\Sentinel\Activations\IlluminateActivationRepository::getModel();
+        public static function user(){
+            return \Zizaco\Confide\Confide::user();
         }
         
         /**
-         * Runtime override of the model.
+         * Sets the 'confirmed' field of the user with the matching code to true.
          *
-         * @param string $model
-         * @return $this 
+         * @param string $code
+         * @return bool Success
          * @static 
          */
-        public static function setModel($model){
-            return \Cartalyst\Sentinel\Activations\IlluminateActivationRepository::setModel($model);
+        public static function confirm($code){
+            return \Zizaco\Confide\Confide::confirm($code);
+        }
+        
+        /**
+         * Checks if a user with the given identity (email or username) already
+         * exists and retrieve it.
+         *
+         * @param array $identity Array containing at least 'username' or 'email'.
+         * @return \Zizaco\Confide\ConfideUserInterface|null 
+         * @static 
+         */
+        public static function getUserByEmailOrUsername($identity){
+            return \Zizaco\Confide\Confide::getUserByEmailOrUsername($identity);
+        }
+        
+        /**
+         * Attempt to log a user into the application with password and
+         * identity field(s), usually email or username.
+         *
+         * @param array $input Array containing at least 'username' or 'email' and 'password'.
+         *                               Optionally the 'remember' boolean.
+         * @param bool $mustBeConfirmed If true, the user must have confirmed his email account in order to log-in.
+         * @return bool Success.
+         * @static 
+         */
+        public static function logAttempt($input, $mustBeConfirmed = true){
+            return \Zizaco\Confide\Confide::logAttempt($input, $mustBeConfirmed);
+        }
+        
+        /**
+         * Asks the loginThrottler service if the given identity has reached the throttle_limit.
+         *
+         * @param mixed $identity The login identity.
+         * @return boolean True if the identity has reached the throttle_limit.
+         * @static 
+         */
+        public static function isThrottled($identity){
+            return \Zizaco\Confide\Confide::isThrottled($identity);
+        }
+        
+        /**
+         * If an user with the given email exists then generate a token for password
+         * change and saves it in the 'password_reminders' table with the email
+         * of the user.
+         *
+         * @param string $email
+         * @return string $token
+         * @static 
+         */
+        public static function forgotPassword($email){
+            return \Zizaco\Confide\Confide::forgotPassword($email);
+        }
+        
+        /**
+         * Delete the record of the given token from 'password_reminders' table.
+         *
+         * @param string $token Token retrieved from a forgotPassword.
+         * @return boolean Success.
+         * @static 
+         */
+        public static function destroyForgotPasswordToken($token){
+            return \Zizaco\Confide\Confide::destroyForgotPasswordToken($token);
+        }
+        
+        /**
+         * Returns a user that corresponds to the given reset password token or
+         * false if there is no user with the given token.
+         *
+         * @param string $token
+         * @return \Zizaco\Confide\ConfideUser 
+         * @static 
+         */
+        public static function userByResetPasswordToken($token){
+            return \Zizaco\Confide\Confide::userByResetPasswordToken($token);
+        }
+        
+        /**
+         * Log the user out of the application.
+         *
+         * @static 
+         */
+        public static function logout(){
+            return \Zizaco\Confide\Confide::logout();
+        }
+        
+        /**
+         * Display the default login view.
+         *
+         * @return \Illuminate\View\View 
+         * @static 
+         */
+        public static function makeLoginForm(){
+            return \Zizaco\Confide\Confide::makeLoginForm();
+        }
+        
+        /**
+         * Display the default signup view
+         *
+         * @return \Illuminate\View\View 
+         * @static 
+         */
+        public static function makeSignupForm(){
+            return \Zizaco\Confide\Confide::makeSignupForm();
+        }
+        
+        /**
+         * Display the forget password view.
+         *
+         * @return \Illuminate\View\View 
+         * @static 
+         */
+        public static function makeForgotPasswordForm(){
+            return \Zizaco\Confide\Confide::makeForgotPasswordForm();
+        }
+        
+        /**
+         * Display the forget password view
+         *
+         * @return \Illuminate\View\View 
+         * @static 
+         */
+        public static function makeResetPasswordForm($token){
+            return \Zizaco\Confide\Confide::makeResetPasswordForm($token);
         }
         
     }
 
 
-    class Reminder extends \Cartalyst\Sentinel\Laravel\Facades\Reminder{
+    class Entrust extends \Zizaco\Entrust\EntrustFacade{
         
         /**
-         * {@inheritDoc}
+         * Checks if the current user has a role by its name
          *
-         * @static 
-         */
-        public static function create($user){
-            return \Cartalyst\Sentinel\Reminders\IlluminateReminderRepository::create($user);
-        }
-        
-        /**
-         * {@inheritDoc}
-         *
-         * @static 
-         */
-        public static function exists($user, $code = null){
-            return \Cartalyst\Sentinel\Reminders\IlluminateReminderRepository::exists($user, $code);
-        }
-        
-        /**
-         * {@inheritDoc}
-         *
-         * @static 
-         */
-        public static function complete($user, $code, $password){
-            return \Cartalyst\Sentinel\Reminders\IlluminateReminderRepository::complete($user, $code, $password);
-        }
-        
-        /**
-         * {@inheritDoc}
-         *
-         * @static 
-         */
-        public static function removeExpired(){
-            return \Cartalyst\Sentinel\Reminders\IlluminateReminderRepository::removeExpired();
-        }
-        
-        /**
-         * Create a new instance of the model.
-         *
-         * @param array $data
-         * @return mixed 
-         * @static 
-         */
-        public static function createModel($data = array()){
-            return \Cartalyst\Sentinel\Reminders\IlluminateReminderRepository::createModel($data);
-        }
-        
-        /**
-         * Returns the model.
-         *
-         * @return string 
-         * @static 
-         */
-        public static function getModel(){
-            return \Cartalyst\Sentinel\Reminders\IlluminateReminderRepository::getModel();
-        }
-        
-        /**
-         * Runtime override of the model.
-         *
-         * @param string $model
-         * @return $this 
-         * @static 
-         */
-        public static function setModel($model){
-            return \Cartalyst\Sentinel\Reminders\IlluminateReminderRepository::setModel($model);
-        }
-        
-    }
-
-
-    class Sentinel extends \Cartalyst\Sentinel\Laravel\Facades\Sentinel{
-        
-        /**
-         * Registers a user. You may provide a callback to occur before the user
-         * is saved, or provide a true boolean as a shortcut to activation.
-         *
-         * @param array $credentials
-         * @param \Closure|bool $callback
-         * @return \Cartalyst\Sentinel\Users\UserInteface|bool 
-         * @throws \InvalidArgumentException
-         * @static 
-         */
-        public static function register($credentials, $callback = null){
-            return \Cartalyst\Sentinel\Sentinel::register($credentials, $callback);
-        }
-        
-        /**
-         * Registers and activates the user.
-         *
-         * @param array $credentials
-         * @return \Cartalyst\Sentinel\Users\UserInteface|bool 
-         * @static 
-         */
-        public static function registerAndActivate($credentials){
-            return \Cartalyst\Sentinel\Sentinel::registerAndActivate($credentials);
-        }
-        
-        /**
-         * Activates the given user.
-         *
-         * @param mixed $user
-         * @return bool 
-         * @throws \InvalidArgumentException
-         * @static 
-         */
-        public static function activate($user){
-            return \Cartalyst\Sentinel\Sentinel::activate($user);
-        }
-        
-        /**
-         * Checks to see if a user is logged in.
-         *
-         * @return \Cartalyst\Sentinel\Users\UserInterface|bool 
-         * @static 
-         */
-        public static function check(){
-            return \Cartalyst\Sentinel\Sentinel::check();
-        }
-        
-        /**
-         * Checks to see if a user is logged in, bypassing checkpoints
-         *
-         * @return \Cartalyst\Sentinel\Users\UserInterface|bool 
-         * @static 
-         */
-        public static function forceCheck(){
-            return \Cartalyst\Sentinel\Sentinel::forceCheck();
-        }
-        
-        /**
-         * Checks if we are currently a guest.
-         *
-         * @return \Cartalyst\Sentinel\Users\UserInterface|bool 
-         * @static 
-         */
-        public static function guest(){
-            return \Cartalyst\Sentinel\Sentinel::guest();
-        }
-        
-        /**
-         * Authenticates a user, with "remember" flag.
-         *
-         * @param \Cartalyst\Sentinel\Users\UserInterface|array $credentials
-         * @param bool $remember
-         * @param bool $login
-         * @return \Cartalyst\Sentinel\Users\UserInterface|bool 
-         * @static 
-         */
-        public static function authenticate($credentials, $remember = false, $login = true){
-            return \Cartalyst\Sentinel\Sentinel::authenticate($credentials, $remember, $login);
-        }
-        
-        /**
-         * Authenticates a user, with the "remember" flag.
-         *
-         * @param \Cartalyst\Sentinel\Users\UserInterface|array $credentials
-         * @return \Cartalyst\Sentinel\Users\UserInterface|bool 
-         * @static 
-         */
-        public static function authenticateAndRemember($credentials){
-            return \Cartalyst\Sentinel\Sentinel::authenticateAndRemember($credentials);
-        }
-        
-        /**
-         * Forces an authentication to bypass checkpoints.
-         *
-         * @param \Cartalyst\Sentinel\Users\UserInterface|array $credentials
-         * @param bool $remember
-         * @return \Cartalyst\Sentinel\Users\UserInterface|bool 
-         * @static 
-         */
-        public static function forceAuthenticate($credentials, $remember = false){
-            return \Cartalyst\Sentinel\Sentinel::forceAuthenticate($credentials, $remember);
-        }
-        
-        /**
-         * Forces an authentication to bypass checkpoints, with the "remember" flag.
-         *
-         * @param \Cartalyst\Sentinel\Users\UserInterface|array $credentials
-         * @return \Cartalyst\Sentinel\Users\UserInterface|bool 
-         * @static 
-         */
-        public static function forceAuthenticateAndRemember($credentials){
-            return \Cartalyst\Sentinel\Sentinel::forceAuthenticateAndRemember($credentials);
-        }
-        
-        /**
-         * Attempt a stateless authentication.
-         *
-         * @param \Cartalyst\Sentinel\Users\UserInterface|array $credentials
-         * @return \Cartalyst\Sentinel\Users\UserInterface|bool 
-         * @static 
-         */
-        public static function stateless($credentials){
-            return \Cartalyst\Sentinel\Sentinel::stateless($credentials);
-        }
-        
-        /**
-         * Attempt to authenticate using HTTP Basic Auth.
-         *
-         * @return mixed 
-         * @static 
-         */
-        public static function basic(){
-            return \Cartalyst\Sentinel\Sentinel::basic();
-        }
-        
-        /**
-         * Returns the request credentials.
-         *
-         * @return array 
-         * @static 
-         */
-        public static function getRequestCredentials(){
-            return \Cartalyst\Sentinel\Sentinel::getRequestCredentials();
-        }
-        
-        /**
-         * Sets the closure which resolves the request credentials.
-         *
-         * @param \Closure $requestCredentials
-         * @return void 
-         * @static 
-         */
-        public static function setRequestCredentials($requestCredentials){
-            \Cartalyst\Sentinel\Sentinel::setRequestCredentials($requestCredentials);
-        }
-        
-        /**
-         * Sends a response when HTTP basic authentication fails.
-         *
-         * @return mixed 
-         * @throws \RuntimeException
-         * @static 
-         */
-        public static function getBasicResponse(){
-            return \Cartalyst\Sentinel\Sentinel::getBasicResponse();
-        }
-        
-        /**
-         * Sets the callback which creates a basic response.
-         *
-         * @param \Closure $basicResonse
-         * @return void 
-         * @static 
-         */
-        public static function creatingBasicResponse($basicResponse){
-            \Cartalyst\Sentinel\Sentinel::creatingBasicResponse($basicResponse);
-        }
-        
-        /**
-         * Persists a login for the given user.
-         *
-         * @param \Cartalyst\Sentinel\Users\UserInterface $user
-         * @param bool $remember
-         * @return \Cartalyst\Sentinel\Users\UserInterface|bool 
-         * @static 
-         */
-        public static function login($user, $remember = false){
-            return \Cartalyst\Sentinel\Sentinel::login($user, $remember);
-        }
-        
-        /**
-         * Persists a login for the given user, with the "remember" flag.
-         *
-         * @param \Cartalyst\Sentinel\Users\UserInterface $user
-         * @return \Cartalyst\Sentinel\Users\UserInterface|bool 
-         * @static 
-         */
-        public static function loginAndRemember($user){
-            return \Cartalyst\Sentinel\Sentinel::loginAndRemember($user);
-        }
-        
-        /**
-         * Logs the current user out.
-         *
-         * @param \Cartalyst\Sentinel\Users\UserInterface $user
-         * @param bool $everywhere
+         * @param string $name Role name.
          * @return bool 
          * @static 
          */
-        public static function logout($user = null, $everywhere = false){
-            return \Cartalyst\Sentinel\Sentinel::logout($user, $everywhere);
+        public static function hasRole($role, $requireAll = false){
+            return \Zizaco\Entrust\Entrust::hasRole($role, $requireAll);
         }
         
         /**
-         * Pass a closure to Sentinel to bypass checkpoints.
+         * Check if the current user has a permission by its name
          *
-         * @param \Closure $callback
-         * @param array $checkpoints
+         * @param string $permission Permission string.
+         * @return bool 
+         * @static 
+         */
+        public static function can($permission, $requireAll = false){
+            return \Zizaco\Entrust\Entrust::can($permission, $requireAll);
+        }
+        
+        /**
+         * Get the currently authenticated user or null.
+         *
+         * @return \Zizaco\Entrust\Illuminate\Auth\UserInterface|null 
+         * @static 
+         */
+        public static function user(){
+            return \Zizaco\Entrust\Entrust::user();
+        }
+        
+        /**
+         * Filters a route for a role or set of roles.
+         * 
+         * If the third parameter is null then abort with status code 403.
+         * Otherwise the $result is returned.
+         *
+         * @param string $route Route pattern. i.e: "admin/*"
+         * @param array|string $roles The role(s) needed
+         * @param mixed $result i.e: Redirect::to('/')
+         * @param bool $requireAll User must have all roles
          * @return mixed 
          * @static 
          */
-        public static function bypassCheckpoints($callback, $checkpoints = array()){
-            return \Cartalyst\Sentinel\Sentinel::bypassCheckpoints($callback, $checkpoints);
+        public static function routeNeedsRole($route, $roles, $result = null, $requireAll = true){
+            return \Zizaco\Entrust\Entrust::routeNeedsRole($route, $roles, $result, $requireAll);
         }
         
         /**
-         * Checks if checkpoints are enabled.
+         * Filters a route for a permission or set of permissions.
+         * 
+         * If the third parameter is null then abort with status code 403.
+         * Otherwise the $result is returned.
          *
-         * @return bool 
+         * @param string $route Route pattern. i.e: "admin/*"
+         * @param array|string $permissions The permission(s) needed
+         * @param mixed $result i.e: Redirect::to('/')
+         * @param bool $requireAll User must have all permissions
+         * @return mixed 
          * @static 
          */
-        public static function checkpointsStatus(){
-            return \Cartalyst\Sentinel\Sentinel::checkpointsStatus();
+        public static function routeNeedsPermission($route, $permissions, $result = null, $requireAll = true){
+            return \Zizaco\Entrust\Entrust::routeNeedsPermission($route, $permissions, $result, $requireAll);
         }
         
         /**
-         * Enables checkpoints.
+         * Filters a route for role(s) and/or permission(s).
+         * 
+         * If the third parameter is null then abort with status code 403.
+         * Otherwise the $result is returned.
          *
+         * @param string $route Route pattern. i.e: "admin/*"
+         * @param array|string $roles The role(s) needed
+         * @param array|string $permissions The permission(s) needed
+         * @param mixed $result i.e: Redirect::to('/')
+         * @param bool $requireAll User must have all roles and permissions
          * @return void 
          * @static 
          */
-        public static function enableCheckpoints(){
-            \Cartalyst\Sentinel\Sentinel::enableCheckpoints();
-        }
-        
-        /**
-         * Disables checkpoints.
-         *
-         * @return void 
-         * @static 
-         */
-        public static function disableCheckpoints(){
-            \Cartalyst\Sentinel\Sentinel::disableCheckpoints();
-        }
-        
-        /**
-         * Add a new checkpoint to Sentinel.
-         *
-         * @param string $key
-         * @param \Cartalyst\Sentinel\Checkpoints\CheckpointInterface $checkpoint
-         * @return void 
-         * @static 
-         */
-        public static function addCheckpoint($key, $checkpoint){
-            \Cartalyst\Sentinel\Sentinel::addCheckpoint($key, $checkpoint);
-        }
-        
-        /**
-         * Removes a checkpoint.
-         *
-         * @param string $key
-         * @return void 
-         * @static 
-         */
-        public static function removeCheckpoint($key){
-            \Cartalyst\Sentinel\Sentinel::removeCheckpoint($key);
-        }
-        
-        /**
-         * Returns the currently logged in user, lazily checking for it.
-         *
-         * @param bool $check
-         * @return \Cartalyst\Sentinel\Users\UserInterface 
-         * @static 
-         */
-        public static function getUser($check = true){
-            return \Cartalyst\Sentinel\Sentinel::getUser($check);
-        }
-        
-        /**
-         * Sets the user associated with Sentinel (does not log in).
-         *
-         * @param \Cartalyst\Sentinel\Users\UserInterface $user
-         * @return void 
-         * @static 
-         */
-        public static function setUser($user){
-            \Cartalyst\Sentinel\Sentinel::setUser($user);
-        }
-        
-        /**
-         * Returns the user repository.
-         *
-         * @return \Cartalyst\Sentinel\Users\UserRepositoryInterface 
-         * @static 
-         */
-        public static function getUserRepository(){
-            return \Cartalyst\Sentinel\Sentinel::getUserRepository();
-        }
-        
-        /**
-         * Sets the user repository.
-         *
-         * @param \Cartalyst\Sentinel\Users\UserRepositoryInterface $users
-         * @return void 
-         * @static 
-         */
-        public static function setUserRepository($users){
-            \Cartalyst\Sentinel\Sentinel::setUserRepository($users);
-        }
-        
-        /**
-         * Returns the role repository.
-         *
-         * @return \Cartalyst\Sentinel\Roles\RoleRepositoryInterface 
-         * @static 
-         */
-        public static function getRoleRepository(){
-            return \Cartalyst\Sentinel\Sentinel::getRoleRepository();
-        }
-        
-        /**
-         * Sets the role repository.
-         *
-         * @param \Cartalyst\Sentinel\Roles\RoleRepositoryInterface $roles
-         * @return void 
-         * @static 
-         */
-        public static function setRoleRepository($roles){
-            \Cartalyst\Sentinel\Sentinel::setRoleRepository($roles);
-        }
-        
-        /**
-         * Returns the persistences repository.
-         *
-         * @return \Cartalyst\Sentinel\Persistences\PersistenceRepositoryInterface 
-         * @static 
-         */
-        public static function getPersistenceRepository(){
-            return \Cartalyst\Sentinel\Sentinel::getPersistenceRepository();
-        }
-        
-        /**
-         * Sets the persistences repository.
-         *
-         * @param \Cartalyst\Sentinel\Persistences\PersistenceRepositoryInterface $persistences
-         * @return void 
-         * @static 
-         */
-        public static function setPersistenceRepository($persistences){
-            \Cartalyst\Sentinel\Sentinel::setPersistenceRepository($persistences);
-        }
-        
-        /**
-         * Returns the activations repository.
-         *
-         * @return \Cartalyst\Sentinel\Activations\ActivationRepositoryInterface 
-         * @static 
-         */
-        public static function getActivationRepository(){
-            return \Cartalyst\Sentinel\Sentinel::getActivationRepository();
-        }
-        
-        /**
-         * Sets the activations repository.
-         *
-         * @param \Cartalyst\Sentinel\Activations\ActivationRepositoryInterface $activations
-         * @return void 
-         * @static 
-         */
-        public static function setActivationRepository($activations){
-            \Cartalyst\Sentinel\Sentinel::setActivationRepository($activations);
-        }
-        
-        /**
-         * Returns the reminders repository.
-         *
-         * @return \Cartalyst\Sentinel\Reminders\ReminderRepositoryInterface 
-         * @static 
-         */
-        public static function getReminderRepository(){
-            return \Cartalyst\Sentinel\Sentinel::getReminderRepository();
-        }
-        
-        /**
-         * Sets the reminders repository.
-         *
-         * @param \Cartalyst\Sentinel\Reminders\ReminderRepositoryInterface $reminders
-         * @return void 
-         * @static 
-         */
-        public static function setReminderRepository($reminders){
-            \Cartalyst\Sentinel\Sentinel::setReminderRepository($reminders);
-        }
-        
-        /**
-         * Returns the event dispatcher.
-         *
-         * @return \Illuminate\Events\Dispatcher 
-         * @static 
-         */
-        public static function getDispatcher(){
-            return \Cartalyst\Sentinel\Sentinel::getDispatcher();
-        }
-        
-        /**
-         * Sets the event dispatcher instance.
-         *
-         * @param \Illuminate\Events\Dispatcher $dispatcher
-         * @return $this 
-         * @static 
-         */
-        public static function setDispatcher($dispatcher){
-            return \Cartalyst\Sentinel\Sentinel::setDispatcher($dispatcher);
-        }
-        
-        /**
-         * Returns the event dispatcher status.
-         *
-         * @return bool 
-         * @static 
-         */
-        public static function getDispatcherStatus(){
-            return \Cartalyst\Sentinel\Sentinel::getDispatcherStatus();
-        }
-        
-        /**
-         * Sets the event dispatcher status.
-         *
-         * @param bool $status
-         * @return $this 
-         * @static 
-         */
-        public static function setDispatcherStatus($status){
-            return \Cartalyst\Sentinel\Sentinel::setDispatcherStatus($status);
-        }
-        
-        /**
-         * Enables the event dispatcher.
-         *
-         * @return $this 
-         * @static 
-         */
-        public static function enableDispatcher(){
-            return \Cartalyst\Sentinel\Sentinel::enableDispatcher();
-        }
-        
-        /**
-         * Disables the event dispatcher.
-         *
-         * @return $this 
-         * @static 
-         */
-        public static function disableDispatcher(){
-            return \Cartalyst\Sentinel\Sentinel::disableDispatcher();
+        public static function routeNeedsRoleOrPermission($route, $roles, $permissions, $result = null, $requireAll = false){
+            \Zizaco\Entrust\Entrust::routeNeedsRoleOrPermission($route, $roles, $permissions, $result, $requireAll);
         }
         
     }
@@ -12949,92 +12951,6 @@ if (!function_exists('with')) {
          */
         public static function setDefaultFormat($format){
             \Dingo\Api\Dispatcher::setDefaultFormat($format);
-        }
-        
-    }
-
-
-    class Auth extends \App\Facades\Api\Auth{
-        
-        /**
-         * 
-         *
-         * @return \App\User; 
-         * @static 
-         */
-        public static function getUser($authenticate = true){
-            return \App\Auth::getUser($authenticate);
-        }
-        
-        /**
-         * 
-         *
-         * @return \App\User; 
-         * @static 
-         */
-        public static function user($authenticate = true){
-            return \App\Auth::user($authenticate);
-        }
-        
-        /**
-         * Authenticate the current request.
-         *
-         * @param array $providers
-         * @throws \Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException
-         * @return mixed 
-         * @static 
-         */
-        public static function authenticate($providers = array()){
-            //Method inherited from \Dingo\Api\Auth\Auth            
-            return \App\Auth::authenticate($providers);
-        }
-        
-        /**
-         * Set the authenticated user.
-         *
-         * @param \Illuminate\Auth\GenericUser|\Illuminate\Database\Eloquent\Model $user
-         * @return \Dingo\Api\Auth\Authenticator 
-         * @static 
-         */
-        public static function setUser($user){
-            //Method inherited from \Dingo\Api\Auth\Auth            
-            return \App\Auth::setUser($user);
-        }
-        
-        /**
-         * Check if a user has authenticated with the API.
-         *
-         * @param bool $authenticate
-         * @return bool 
-         * @static 
-         */
-        public static function check($authenticate = true){
-            //Method inherited from \Dingo\Api\Auth\Auth            
-            return \App\Auth::check($authenticate);
-        }
-        
-        /**
-         * Get the provider used for authentication.
-         *
-         * @return \Dingo\Api\Contract\Auth\Provider 
-         * @static 
-         */
-        public static function getProviderUsed(){
-            //Method inherited from \Dingo\Api\Auth\Auth            
-            return \App\Auth::getProviderUsed();
-        }
-        
-        /**
-         * Extend the authentication layer with a custom provider.
-         *
-         * @param string $key
-         * @param object|callable $provider
-         * @return void 
-         * @static 
-         */
-        public static function extend($key, $provider){
-            //Method inherited from \Dingo\Api\Auth\Auth            
-            \App\Auth::extend($key, $provider);
         }
         
     }

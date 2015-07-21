@@ -54,6 +54,7 @@ class UserTransformer implements Adapter
      */
     public function transform($response, $transformer, Binding $binding, Request $request)
     {
+        return $response->toArray();
 
         $arr                      = $response->toArray();
         $arr[ 'all_permissions' ] = $arr[ 'permissions' ];

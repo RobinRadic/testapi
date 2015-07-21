@@ -5,14 +5,13 @@
  * MIT License and copyright information bundled with this package
  * in the LICENSE file or visit http://radic.mit-license.com
  */
-use Illuminate\Database\Seeder;
 
+use Illuminate\Database\Seeder;
+use Laradic\Support\String;
 use App\Permission;
 use App\Role;
 use App\User;
-use Illuminate\Database\Eloquent\Model;
 
-use Laradic\Support\String;
 
 /**
  * This is the UserSeeder.
@@ -25,56 +24,47 @@ use Laradic\Support\String;
  */
 class UserSeeder extends Seeder
 {
-    /** Instantiates the class */
+
+
+    protected function mk($name, $displayname, $desc)
+    {
+        return [ 'name' => $name, 'display_name' => $displayname, 'description' => $desc ];
+    }
+
     public function run()
     {
-        // Insert default roles and default permissions. Also, add all route names as permissions. ADmin and mod will get access
-        /** @var \App\Role[] $roles */
+
         $routes = $this->getRouteNamePermissions();
-        $roles  = [ ];
-        foreach ( Config::get('packadic.acl.default_roles') as $roleName => $permissions )
-        {
-            /** @var \App\Role $role */
-            $role = Sentinel::getRoleRepository()->createModel()->create([
-                'name' => $roleName,
-                'slug' => String::slugify($roleName, '_'),
-            ]);
-            foreach ( $permissions as $permission )
-            {
-                $role->addPermission($permission, true);
-            }
+        $roles = [
+            $this->mk('admin', 'Admin', 'Administrator can do everything'),
+            $this->mk('moderator', 'Moderator', 'Moderator is quite powerfull aswell'),
+            $this->mk('user', 'User', 'Regular users are allowed to pay money')
+        ];
 
-            foreach ( $routes as $route )
-            {
-                $role->addPermission($route[ 'name' ], ($roleName === 'Admin' or $roleName === 'Moderator'));
-            }
-            $role->save();
-            $roles[ $roleName ] = $role;
+        $permissions = [];
+        foreach ( $routes as $route )
+        {
+            $permissions[$route['name']] = Permission::create($this->mk($route[ 'name' ], 'API Route: ' . $route[ 'name' ], $route[ 'action' ]));
         }
 
-        $faker = \Faker\Factory::create();
-        $user  = \Sentinel::registerAndActivate([
-            'email'      => 'robin@radic.nl',
-            'password'   => 'test',
-            "first_name" => 'Robin',
-            "last_name"  => 'Radic'
-        ]);
-        $roles[ 'Admin' ]->users()->attach($user);
-
-        foreach ( [ 'Admin' => 2, 'Moderator' => 10, 'User' => 50 ] as $role => $repeat )
+        foreach ( $roles as $role )
         {
-            for ( $i = 0; $i < $repeat; $i++ )
-            {
-                $user = \Sentinel::registerAndActivate([
-                    'email'      => $faker->email,
-                    'first_name' => $faker->firstName,
-                    'last_name'  => $faker->lastName,
-                    'password'   => str_random(10)
-                ]);
-                $roles[ $role ]->users()->attach($user);
-            }
+            $roles[$role['name']] = Role::create($role);
         }
+
+        $roles['admin']->attachPermissions(array_values($permissions));
+        $roles['moderator']->attachPermissions(array_values($permissions));
+
+        factory(App\User::class, 'radic')->create()->attachRole($roles['admin']);
+        factory(App\User::class, 'admin', 2)->create()->each(function($u) use ($roles) {
+            $u->attachRole($roles['moderator']);
+        });
+        factory(App\User::class, 40)->create()->each(function($u) use ($roles) {
+            $u->attachRole($roles['user']);
+        });
     }
+
+
     protected function getRouteNamePermissions()
     {
         $routes     = app('Dingo\Api\Routing\Router')->getRoutes();
@@ -83,7 +73,10 @@ class UserSeeder extends Seeder
         {
             foreach ( $collection->getRoutes() as $route )
             {
-                if(is_null($route->getName())) continue;
+                if ( is_null($route->getName()) )
+                {
+                    continue;
+                }
                 $structured[] = [
                     'host'      => $route->domain(),
                     'uri'       => implode('|', $route->methods()) . ' ' . $route->uri(),

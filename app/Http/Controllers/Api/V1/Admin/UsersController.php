@@ -70,9 +70,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $user = Auth::user()->withOnly('roles', [ 'name', 'slug', 'id' ])->paginate(
-            \Request::get('per_page', null), \Request::get('columns', [ '*' ])
-        );
+        $user = Auth::user()->with('roles','roles.perms')->paginate( \Request::get('per_page', null), \Request::get('columns', [ '*' ]) );
 
         return $user; //$this->response->paginator($user, new \Dingo\Api\Transformer\Adapter\Fractal(new \League\Fractal\Manager));
     }
@@ -97,13 +95,14 @@ class UsersController extends Controller
     public function store(RequestContract $request)
     {
         $data  = $request->all();
+        return $this->index();
         $users = \Sentinel::getUserRepository();
         try
         {
             if ( $valid = $users->validForCreation($data) )
             {
                 $user = $users->create($data);
-                \Sentinel::cre
+
                 return $user;
             }
         }

@@ -3,7 +3,7 @@ use Dingo\Api\Routing\Router;
 
 $api = app('Dingo\Api\Routing\Router');
 
-$api->version('v1', [ 'namespace' => 'App\Http\Controllers\Api\V1', 'middleware' => ['api.crsf'] ], function (Router $api)
+$api->version('v1', [ 'namespace' => 'App\Http\Controllers\Api\V1'], function (Router $api)
 {
     /** @var \Dingo\Api\Routing\Router $api */
     $api->group([ 'middleware' => [ 'api.auth', 'api.permission' ] ], function (Router $api)
@@ -20,7 +20,7 @@ $api->version('v1', [ 'namespace' => 'App\Http\Controllers\Api\V1', 'middleware'
         ]);
 
 
-        $api->group([ 'prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => [ 'api.permission:admin' ] ], function (Router $api)
+        $api->group([ 'prefix' => 'admin', 'namespace' => 'Admin'], function (Router $api)
         {
             $api->resource('users', 'UsersController', [
                 'except' => [ 'create', 'edit' ],
